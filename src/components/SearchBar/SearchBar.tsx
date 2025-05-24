@@ -5,7 +5,7 @@ interface SearchBarProps {
   onSubmit: (movie: string) => void;
 }
 
-export default function SearchBar({ onSubmit }: SearchBarProps) {
+const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const collectionValues = (formData: FormData) => {
     const query = formData.get("query") as string;
 
@@ -45,4 +45,6 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
       </header>
     </>
   );
-}
+};
+
+export default SearchBar;
