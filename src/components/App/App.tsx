@@ -32,15 +32,28 @@ export default function App() {
     }
   };
 
+  const handleSelectMovie = (movieId: number) => {
+    const movie = movies.find((movie) => movie.id === movieId);
+    if (movie) {
+      setSelectedMovie(movie);
+      setIsModalOpen(!isModalOpen);
+    }
+  };
+
   return (
     <>
       <SearchBar onSubmit={handleSubmit} />
       {isLoading && <Loader />}
-      {!isError && <ErrorMessage />}
-      {movies.length > 0 && <MovieGrid onSelect={} movies={movies} />}
-      {isModalOpen && (
+      {isError && <ErrorMessage />}
+      {movies.length > 0 && (
+        <MovieGrid onSelect={handleSelectMovie} movies={movies} />
+      )}
+      {isModalOpen && selectedMovie && (
         <MovieModal
-          onClose={() => setIsModalOpen(!isModalOpen)}
+          onClose={() => {
+            setIsModalOpen(false);
+            setSelectedMovie(null);
+          }}
           movie={selectedMovie}
         />
       )}
