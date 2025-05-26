@@ -3,7 +3,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import movieService from "../../services/movieService";
 import { useState } from "react";
 import type { Movie } from "../../types/movie";
-import toast from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
@@ -32,12 +32,9 @@ export default function App() {
     }
   };
 
-  const handleSelectMovie = (movieId: number) => {
-    const movie = movies.find((movie) => movie.id === movieId);
-    if (movie) {
-      setSelectedMovie(movie);
-      setIsModalOpen(!isModalOpen);
-    }
+  const handleSelectMovie = (movie: Movie) => {
+    setSelectedMovie(movie);
+    setIsModalOpen(true);
   };
 
   return (
@@ -57,6 +54,7 @@ export default function App() {
           movie={selectedMovie}
         />
       )}
+      <Toaster />
     </>
   );
 }

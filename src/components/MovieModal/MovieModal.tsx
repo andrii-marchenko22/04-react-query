@@ -47,7 +47,11 @@ const MovieModal = ({ onClose, movie }: MovieModalProps) => {
           &times;
         </button>
         <img
-          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+          src={
+            movie.backdrop_path
+              ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+              : "https://placehold.co/600x400/png?text=No+Image"
+          }
           alt={movie.title}
           className={css.image}
         />
@@ -55,12 +59,10 @@ const MovieModal = ({ onClose, movie }: MovieModalProps) => {
           <h2>{movie.title}</h2>
           <p>{movie.overview}</p>
           <p>
-            <strong>Release Date:</strong>
-            {movie.release_date}
+            <strong>Release Date:</strong> {movie.release_date}
           </p>
           <p>
-            <strong>Rating:</strong>
-            {movie.vote_average}
+            <strong>Rating:</strong> {movie.vote_average}
           </p>
         </div>
       </div>
