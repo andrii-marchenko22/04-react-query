@@ -4,19 +4,23 @@ const token = import.meta.env.VITE_TMDB_TOKEN;
 
 interface MovieProps {
   results: Movie[];
+  total_pages: number;
 }
 
-const movieService = async (movie: string): Promise<Movie[]> => {
+const movieService = async (
+  movie: string,
+  page: number
+): Promise<MovieProps> => {
   const { data } = await axios.get<MovieProps>(
     "https://api.themoviedb.org/3/search/movie",
     {
-      params: { query: movie },
+      params: { query: movie, page },
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
   );
-  return data.results;
+  return data;
 };
 
 export default movieService;
